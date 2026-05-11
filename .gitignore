@@ -33,3 +33,9 @@ coverage
 /playwright/.cache/
 # Webkit with playwright creates a salt file
 salt
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
