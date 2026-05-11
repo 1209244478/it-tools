@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && NODE_OPTIONS=--max_old_space_size=4096 vite build",
-    "preview": "vite preview --port 5050",
+    "preview": "pnpm run build && wrangler dev",
     "test": "npm run test:unit",
     "test:unit": "vitest --environment jsdom",
     "test:e2e": "playwright test",
@@ -34,7 +34,8 @@
     "lint": "eslint src --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore",
     "script:create:tool": "node scripts/create-tool.mjs",
     "script:create:ui": "hygen generator ui-component",
-    "release": "node ./scripts/release.mjs"
+    "release": "node ./scripts/release.mjs",
+    "deploy": "pnpm run build && wrangler deploy"
   },
   "dependencies": {
     "@it-tools/bip39": "^0.0.4",
@@ -107,6 +108,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.43.0",
+    "@cloudflare/vite-plugin": "^1.36.3",
     "@iconify-json/mdi": "^1.1.50",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@playwright/test": "^1.32.3",
@@ -148,6 +150,7 @@
     "vite-svg-loader": "^5.0.0",
     "vitest": "^2.1.0",
     "workbox-window": "^7.0.0",
+    "wrangler": "^4.90.0",
     "zx": "^7.2.1"
   }
 }
