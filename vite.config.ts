@@ -1,3 +1,5 @@
+/// <reference types="vitest/config" />
+
 import { resolve } from 'node:path';
 import { URL, fileURLToPath } from 'node:url';
 
@@ -14,7 +16,6 @@ import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import markdown from 'vite-plugin-vue-markdown';
 import svgLoader from 'vite-svg-loader';
-import { configDefaults } from 'vitest/config';
 
 const baseUrl = process.env.BASE_URL ?? '/';
 
@@ -28,7 +29,7 @@ export default defineConfig({
       fullInstall: true,
       strictMessage: false,
       include: [
-        resolve(__dirname, 'locales/**'),
+        resolve(import.meta.dirname, 'locales/**'),
       ],
     }),
     AutoImport({
@@ -108,7 +109,7 @@ export default defineConfig({
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(process.env.npm_package_version),
   },
   test: {
-    exclude: [...configDefaults.exclude, '**/*.e2e.spec.ts'],
+    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache', '**/*.e2e.spec.ts'],
   },
   build: {
     target: 'esnext',
